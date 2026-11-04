@@ -1,4 +1,8 @@
 <title>יש במלאי</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%231C1233'/%3E%3Cpath d='M17 24h30l-2.4 24a4 4 0 0 1-4 3.6H23.4a4 4 0 0 1-4-3.6z' fill='%23FFE45E' stroke='%23FF3B6B' stroke-width='3' stroke-linejoin='round'/%3E%3Cpath d='M24 24v-3a8 8 0 0 1 16 0v3' fill='none' stroke='%23FF3B6B' stroke-width='3.5' stroke-linecap='round'/%3E%3Ccircle cx='32' cy='36' r='3.6' fill='%231C1233'/%3E%3C/svg%3E">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,20 +18,10 @@
   --accent: #FF3B6B;
   --on-accent: #FFFFFF;
   --chip: #EDE6FF;
+  color-scheme: light;
   --f-display: 'Karantina', 'Heebo', sans-serif;
   --f-body: 'Heebo', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #140E24; --surface: #1F1736; --ink: #F6F1FF; --ink-2: #B9AED3;
-    --line: #35294F; --accent: #FF5C87; --chip: #2B2146; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #140E24; --surface: #1F1736; --ink: #F6F1FF; --ink-2: #B9AED3;
-  --line: #35294F; --accent: #FF5C87; --chip: #2B2146; color-scheme: dark;
-}
-
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
@@ -78,6 +72,7 @@ h1 mark { display: inline-block; background: #FFE45E; color: #1C1233; padding: 0
 .m1 { width: 52%; right: 0; top: 0; transform: rotate(4deg); }
 .m2 { width: 50%; left: 0; top: 78px; transform: rotate(-6deg); }
 .m3 { width: 40%; right: 20%; bottom: 0; transform: rotate(-2deg); }
+.m1 { z-index: 2; }
 .sticker { position: absolute; left: 36%; top: -4px; width: 108px; height: 108px; border-radius: 50%; background: #FFE45E; color: #1C1233; display: grid; place-items: center; text-align: center; font-family: var(--f-display); font-weight: 700; font-size: 32px; line-height: .9; transform: rotate(12deg); z-index: 3; border: 4px solid #1C1233; }
 
 /* צילום מוצר */
@@ -339,6 +334,146 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
 .bounce { transform-box: fill-box; transform-origin: center bottom; animation: bnc .7s ease-out; }
 @keyframes bnc { 30% { transform: translateY(-12px); } 60% { transform: translateY(0); } 80% { transform: translateY(-4px); } }
 .pcap { position: absolute; bottom: 8px; left: 0; right: 0; text-align: center; font-size: 12px; color: var(--ink-2); pointer-events: none; }
+
+html { -webkit-text-size-adjust: 100%; }
+@media (max-width: 760px) {
+  h1 { font-size: clamp(52px, 17vw, 76px); line-height: .98; }
+  h1 mark, h1 em { display: inline; padding: .02em .14em; -webkit-box-decoration-break: clone; box-decoration-break: clone; line-height: 1.12; }
+  .hero p.sub { font-size: 19px; }
+  .btn, .hero-cta .btn { min-height: 52px; }
+  .drawer { width: 100vw; max-width: 100vw; }
+}
+@media (max-width: 760px) {
+  .toast { bottom: auto; top: calc(78px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -16px); }
+  .toast.on { transform: translate(-50%, 0); }
+}
+
+.fx { position: fixed; inset: 0; z-index: 90; pointer-events: none; overflow: hidden; animation: fxout .5s 2.5s forwards; }
+.tis { position: absolute; top: -10%; left: var(--x); width: 52%; max-width: 260px; opacity: 0; animation: tisIn 2.6s var(--d) ease-in-out both; filter: drop-shadow(0 6px 10px rgba(28,18,51,.12)); rotate: var(--r); }
+@keyframes tisIn { 0% { opacity: 0; transform: translateY(-20%) rotate(-8deg); } 25% { opacity: 1; } 70% { opacity: 1; } 100% { opacity: 0; transform: translateY(70vh) rotate(10deg); } }
+@keyframes fxout { to { opacity: 0; } }
+.bu { position: absolute; bottom: -90px; left: var(--x); width: var(--s); height: var(--s); border-radius: 50%; padding: 0; pointer-events: auto; cursor: pointer;
+  border: 1.5px solid rgba(127,184,232,.9); background: radial-gradient(circle at 32% 28%, #fff 0 9%, rgba(255,255,255,.35) 10% 38%, rgba(205,231,255,.28) 70%);
+  animation: buUp var(--t) var(--d) ease-out both; }
+@keyframes buUp { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(-78vh) translateX(16px); opacity: .9; } }
+.bu.pop { animation: buPop .38s ease-out forwards; }
+@keyframes buPop { 40% { transform: scale(1.35); opacity: .8; } 100% { transform: scale(1.7); opacity: 0; } }
+@media (max-width: 760px) {
+  .toolbar { display: flex; flex-direction: column; }
+  .sortrow { order: -1; padding: 12px 0 0; }
+  .sort-btn { height: 40px; }
+  .chips { padding-block: 10px 6px; }
+  .grid { gap: 20px 10px; padding-bottom: 40px; }
+  .shot { aspect-ratio: 1 / 1.08; border-radius: 16px; }
+  .desc { display: none; }
+  .info { padding-top: 8px; gap: 4px; }
+  .info h3 { font-size: 14px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .price b { font-size: 17px; }
+  .price s { font-size: 12px; }
+  .add { height: 38px; font-size: 13px; margin-top: 4px; }
+  .tag { font-size: 11px; padding: 6px 10px; bottom: 8px; }
+  .cat-head { padding-top: 18px; }
+}
+@media (max-width: 760px) {
+  .d-head { padding: 10px 16px; }
+  .d-head h2 { font-size: 28px; }
+  .x { width: 36px; height: 36px; }
+  .d-body { padding: 4px 16px; }
+  .d-foot { padding: 10px 16px 14px; }
+  .pay { height: 48px; font-size: 16px; }
+  .back { margin-top: 4px; padding: 4px 12px; }
+  .ord { padding: 10px 0 2px; }
+  .steps { margin-bottom: 8px; }
+  .steps li { gap: 3px; font-size: 11px; }
+  .steps li i { width: 24px; height: 24px; font-size: 12px; }
+  .stepof { display: none; }
+  .ord h3 { font-size: 34px; margin-bottom: 4px; }
+  .ord h4 { margin-bottom: 6px; font-size: 14px; }
+  .ord .sub2 { margin-bottom: 12px; font-size: 14px; }
+  .receipt { margin-bottom: 12px; padding-top: 10px; gap: 4px; font-size: 13px; }
+  .opts { gap: 8px; }
+  .opt { padding: 10px 14px; border-radius: 16px; }
+  .opt .ot b { font-size: 15px; }
+  .opt .ot span { font-size: 13px; line-height: 1.35; }
+  .oi { width: 44px; }
+  .scene { height: 112px; margin-bottom: 12px; }
+  .pkg { width: 140px; margin: 0 auto 12px; }
+  .acts { gap: 8px; margin-bottom: 8px; }
+  .line { padding-block: 10px; }
+  .ship { padding: 10px 16px 2px; }
+}
+@media (max-width: 760px) and (max-height: 700px) { .opt { padding: 7px 12px; } .opts { gap: 6px; } .ord h3 { font-size: 30px; } .ord .sub2 { margin-bottom: 8px; } .steps { margin-bottom: 4px; } }
+
+.logo { font-size: 30px; }
+.top .wrap { height: 54px; }
+.logo i { width: 11px; height: 11px; }
+.top-end { display: flex; align-items: center; gap: 8px; }
+.menu-btn { width: 42px; height: 42px; border-radius: 50%; border: 1.5px solid var(--line); background: transparent; display: grid; place-content: center; gap: 4px; padding: 0; }
+.menu-btn span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .25s, opacity .2s; }
+.top.open .menu-btn span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.top.open .menu-btn span:nth-child(2) { opacity: 0; }
+.top.open .menu-btn span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.menu { display: grid; grid-template-rows: 0fr; visibility: hidden; transition: grid-template-rows .3s ease, visibility 0s .3s; }
+.menu > div { overflow: hidden; min-height: 0; }
+.top.open .menu { grid-template-rows: 1fr; visibility: visible; transition: grid-template-rows .3s ease, visibility 0s; }
+.menu .wrap { display: flex; flex-direction: column; padding-block: 4px 10px; }
+.menu a { padding: 13px 4px; font-weight: 700; font-size: 18px; color: var(--ink); text-decoration: none; border-top: 1px solid var(--line); }
+.menu a:first-child { border-top: 0; }
+.sep { border: 0; border-top: 1.5px solid var(--line); margin: 6px 0 0; }
+#catalog, #faq, #news, #blog, #contact { scroll-margin-top: 70px; }
+.chips { overflow: visible; flex-wrap: wrap; gap: 6px; }
+.chip { flex: 1 1 auto; text-align: center; padding: 8px 12px; }
+.sortrow { padding: 10px 0 0; }
+.blog { padding-block: 40px 8px; }
+.blog h2 { font-family: var(--f-display); font-weight: 700; font-size: 48px; line-height: .95; margin: 0 0 16px; }
+.posts { display: grid; gap: 12px; }
+@media (min-width: 760px) { .posts { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.posts article { border: 1.5px solid var(--line); border-radius: 20px; padding: 16px 18px; background: var(--surface); }
+.posts span { display: inline-block; background: var(--chip); border-radius: 999px; padding: 3px 10px; font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+.posts h3 { margin: 0 0 6px; font-size: 17px; line-height: 1.25; }
+.posts p { margin: 0; color: var(--ink-2); font-size: 14px; }
+.contact form { display: grid; gap: 10px; }
+.contact input, .contact textarea { font: inherit; width: 100%; padding: 12px 16px; border: 1.5px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--ink); }
+.contact textarea { resize: none; }
+.opts.pk { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.opts.pk .opt { padding: 10px 12px; gap: 8px; }
+.opts.pk .opt .ot b { font-size: 14px; }
+.opts.pk .opt .ot span { font-size: 12px; }
+.nt-top { position: absolute; top: 0; left: 0; right: 0; height: 16px; background: linear-gradient(#6B3A21, #4A2415); border-radius: 0 0 14px 14px; animation: ntTop .4s both; }
+.nt { position: absolute; top: 0; left: var(--x); width: var(--w); height: var(--h); border-radius: 0 0 999px 999px; background: linear-gradient(90deg, #5A2F1B, #7A4429 45%, #4A2415); transform-origin: top; animation: ntDrip 3.2s var(--d) cubic-bezier(.4,.1,.5,1) both; box-shadow: inset 4px 0 6px rgba(255,255,255,.12); }
+@keyframes ntTop { from { transform: translateY(-100%); } }
+@keyframes ntDrip { 0% { transform: scaleY(0); } 100% { transform: scaleY(1); } }
+.mm { position: absolute; top: 0; left: var(--x); width: var(--w); height: calc(var(--w) * .8); border-radius: 34%; background: var(--c); border: 1.5px solid rgba(28,18,51,.18); box-shadow: inset -4px -5px 0 rgba(28,18,51,.06), 0 4px 8px -4px rgba(28,18,51,.3); rotate: var(--r); animation: mmFall 3.4s var(--d) ease-in both; }
+@keyframes mmFall { 0% { transform: translateY(-14vh); } 62% { transform: translateY(var(--ty)); } 76% { transform: translateY(calc(var(--ty) - 7vh)); } 90%, 100% { transform: translateY(var(--ty)); } }
+.by { position: absolute; left: -100px; width: var(--w); animation: byFly var(--t) var(--d) linear both; }
+.by svg { display: block; width: 100%; animation: byBob .5s ease-in-out infinite alternate; }
+.bw { transform-box: fill-box; transform-origin: 80% 100%; animation: bwFlap .22s ease-in-out infinite alternate; }
+@keyframes byFly { from { transform: translateX(0); } to { transform: translateX(calc(100vw + 200px)); } }
+@keyframes byBob { to { transform: translateY(-8px); } }
+@keyframes bwFlap { from { transform: rotate(-14deg); } to { transform: rotate(26deg); } }
+@media (max-width: 760px) {
+  .logo { font-size: 24px; }
+  .top .wrap { height: 50px; }
+  .cart-btn { height: 38px; padding: 0 12px; font-size: 14px; }
+  .menu-btn { width: 38px; height: 38px; }
+  #catalog, #faq, #news, #blog, #contact { scroll-margin-top: 62px; }
+  .chip { padding: 7px 6px; font-size: 13px; }
+  .chips { gap: 5px; padding-block: 8px 4px; }
+  .opts.pk { gap: 6px; }
+  .opts.pk .opt { padding: 8px 10px; }
+}
+.top .menu .wrap { height: auto; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; }
+.top-start { display: flex; align-items: center; gap: 12px; }
+@media (max-width: 760px) { .top-start { gap: 8px; } }
+.sortrow { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.surprise { height: 44px; padding: 0 18px; border: 0; border-radius: 999px; background: #FFE45E; color: #1C1233; font-weight: 800; font-size: 14px; }
+.surprise:hover { filter: brightness(.96); }
+.surprise.spin { animation: spinS .5s; }
+@keyframes spinS { 40% { transform: rotate(-4deg) scale(1.06); } 70% { transform: rotate(3deg); } }
+@media (max-width: 760px) { .surprise { height: 40px; } }
+.oi.pi { width: 34px; }
+.opts.pk .oi.pi { width: 30px; }
+.oi.pi svg { display: block; width: 100%; height: auto; }
 </style>
 
 <div dir="rtl" lang="he">
@@ -346,12 +481,14 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
 <div class="band"><div class="track" id="track"></div></div>
 
 <header class="top"><div class="wrap">
-  <a class="logo" href="#top"><i></i>יש במלאי</a>
-  <button class="cart-btn" id="openCart" aria-label="פתיחת הסל">
+  <div class="top-start"><button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="menu" aria-label="תפריט"><span></span><span></span><span></span></button><a class="logo" href="#top"><i></i>יש במלאי</a></div>
+  <div class="top-end"><button class="cart-btn" id="openCart" aria-label="פתיחת הסל">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></svg>
     <span>סל</span><span class="n" id="cartN" aria-live="polite">0</span>
-  </button>
-</div></header>
+  </button></div>
+</div>
+  <nav class="menu" id="menu" aria-label="ניווט ראשי"><div><div class="wrap"><a href="#blog">בלוג</a><a href="#faq">שאלות נפוצות</a><a href="#contact">כתבו לנו</a></div></div></nav>
+</header>
 
 <main id="top">
   <section class="wrap hero">
@@ -359,20 +496,22 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
       <span class="eyebrow">הקולקציה החדשה · נובמבר 2026</span>
       <h1>כל מה שתמיד חלמתם לקנות - <mark>עכשיו יש במלאי</mark><i class="spark" aria-hidden="true"></i></h1>
       <p class="sub">מוצרים שהייתם קונים אם רק היה אפשר. משלוח מיידי, אחריות לכל החיים.</p>
-      <a class="btn" href="#catalog">לקטלוג</a>
+      
     </div>
     <div class="hero-art" aria-hidden="true">
       <div class="mini m1" style="--c:#D9CCFF"><svg viewBox="0 0 400 500" id="h1"></svg><span class="tag">8 שעות שינה</span></div>
       <div class="mini m2" style="--c:#CFD8FF"><svg viewBox="0 0 400 500" id="h2"></svg><span class="tag">להגיד לא</span></div>
-      <div class="mini m3" style="--c:#FFD3DF"><svg viewBox="0 0 400 500" id="h3"></svg><span class="tag">ביטחון לשלוח</span></div>
+      <div class="mini m3" style="--c:#FFD3DF"><svg viewBox="0 0 400 500" id="h3"></svg><span class="tag">אומץ לשלוח</span></div>
       <div class="sticker">משלוח<br>מיידי</div>
     </div>
   </section>
 
+  <div class="wrap"><hr class="sep"></div>
+
   <section class="wrap" id="catalog">
     <div class="cat-head"><h2>הקטלוג</h2><span class="count" id="count"></span></div>
-    <div class="chips" id="chips" role="group" aria-label="סינון לפי קטגוריה"></div>
     <div class="sortrow">
+      <button class="surprise" data-surprise>תפתיעו אותי</button>
       <div class="sortbox">
         <button class="sort-btn" id="sortBtn" aria-haspopup="true" aria-expanded="false" aria-controls="sortMenu">מיון: <span id="sortLabel">מומלצים</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 9l7 7 7-7"/></svg></button>
         <ul class="sort-menu" id="sortMenu" hidden>
@@ -382,6 +521,7 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
         </ul>
       </div>
     </div>
+    <div class="chips" id="chips" role="group" aria-label="סינון לפי קטגוריה"></div>
     <div class="grid" id="grid"></div>
   </section>
   <section class="wrap trust" aria-label="למה לקנות אצלנו">
@@ -402,11 +542,34 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     </div>
   </section>
 
+  <section class="wrap blog" id="blog">
+    <h2>בלוג</h2>
+    <div class="posts">
+      <article><span>מדריך</span><h3>איך מחליטים בין שינה לשקט</h3><p>שניהם נגמרים מהר. בדקנו מה חוזר למלאי קודם, ומה אפשר להזמין ביחד.</p></article>
+      <article><span>מאחורי הקלעים</span><h3>איפה מחזיקים 8 שעות שינה</h3><p>במחסן קריר, בלי אור ובלי הודעות. אנחנו לא פותחים את הדלת אחרי עשר בלילה.</p></article>
+      <article><span>חדש במלאי</span><h3>המיינה המצויה והמשלוחים שלה</h3><p>היא לא מהירה במיוחד, אבל היא מגיעה ומתלוננת בדרך. זה חלק מהשירות.</p></article>
+    </div>
+  </section>
+
+  <section class="wrap" id="contact">
+    <div class="news contact">
+      <div>
+        <h2>כתבו לנו</h2>
+        <p>חסר לכם משהו במלאי? ספרו לנו, ואולי נשיג אותו.</p>
+      </div>
+      <form id="cForm">
+        <input id="cn" type="text" placeholder="השם שלכם" aria-label="שם" autocomplete="name">
+        <textarea id="cm" required rows="3" placeholder="מה היינו צריכים להביא?" aria-label="הודעה"></textarea>
+        <button class="btn" type="submit">שלחו</button>
+      </form>
+    </div>
+  </section>
+
   <section class="wrap">
     <div class="news" id="news">
       <div>
         <h2>כשמשהו חוזר למלאי, תדעו ראשונים</h2>
-        <p>משאירים מייל ואנחנו מעדכנים כשהשקט, השינה והביטחון חוזרים.</p>
+        <p>משאירים מייל ואנחנו מעדכנים כשהשקט, השינה והאומץ חוזרים.</p>
       </div>
       <form id="nlForm">
         <input id="nl" type="email" required placeholder="המייל שלכם" aria-label="כתובת מייל" autocomplete="email">
@@ -422,7 +585,7 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
       <div class="logo"><i></i>יש במלאי</div>
       <div>כל מה שתמיד חלמתם לקנות. משלוח מיידי, אחריות לכל החיים.</div>
     </div>
-    <div><h4>החנות</h4><a href="#catalog">כל המוצרים</a><a href="#faq">שאלות נפוצות</a><a href="#news">עדכונים על מלאי</a></div>
+    <div><h4>החנות</h4><a href="#catalog">כל המוצרים</a><a href="#faq">שאלות נפוצות</a><a href="#blog">בלוג</a><a href="#contact">כתבו לנו</a><a href="#news">עדכונים על מלאי</a></div>
     <div><h4>שירות</h4><a href="#faq">משלוחים</a><a href="#faq">אחריות</a><a href="#faq">החזרות</a></div>
   </div>
   <div class="fine">© 2026 יש במלאי. חנות קונספט: אף מוצר לא נשלח באמת.</div>
@@ -598,17 +761,17 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
   };
 
   var P = [
-    { id: 'sleep', cat: 'שקט', bg: '#D9CCFF', name: '8 שעות שינה רצופות', desc: 'לילה שלם בלי התעוררות ב־3:47, כולל חלום נעים שלא מתחיל בלחץ. מגיע עם בוקר שבו את מרגישה כמו בן אדם.', price: 249, old: 399, badge: 'הכי נמכר', hot: true },
-    { id: 'msg', cat: 'חברתי', bg: '#FFD3DF', name: 'ביטחון עצמי לפני שליחת הודעה ריסקית', desc: 'טיפה אחת של אומץ, ואת שולחת בלי לבדוק שלוש פעמים. כולל אפס צורך לפתוח את השיחה שוב אחרי.', price: 89, badge: 'חדש' },
-    { id: 'yarn', cat: 'ראש', bg: '#C7F0DA', name: 'היכולת להפסיק לחשוב על משהו מ־2017', desc: 'חתך נקי בחוט, והמחשבה נשארת בשנה שלה. מתאים לכל שעה, במיוחד ל־2:00 בלילה.', price: 1290, badge: 'מהדורה מוגבלת', hot: true },
+    { id: 'sleep', cat: 'שקט', bg: '#D9CCFF', name: '8 שעות שינה רצופות', desc: 'לילה שלם בלי להתעורר ב־3:47, כולל חלום נעים שלא מתחיל בלחץ. מגיע עם בוקר שבו מרגישים כמו בני אדם.', price: 249, old: 399, badge: 'הכי נמכר', hot: true },
+    { id: 'msg', cat: 'חברתי', bg: '#FFD3DF', name: 'אומץ לשלוח הודעה ריסקית', desc: 'טיפה אחת של אומץ, ושולחים בלי לבדוק שלוש פעמים. בלי הצורך לפתוח את השיחה שוב אחר כך.', price: 89, badge: 'חדש' },
+    { id: 'yarn', cat: 'ראש', bg: '#C7F0DA', name: 'להפסיק לחשוב על משהו מ־2017', desc: 'חתך נקי בחוט, והמחשבה נשארת בשנה שלה. מתאים לכל שעה, במיוחד ל־2:00 בלילה.', price: 1290, badge: 'מהדורה מוגבלת', hot: true },
     { id: 'door', cat: 'שקט', bg: '#CDE5FF', name: '24 שעות שאף אחד לא מדבר איתי', desc: 'יממה שלמה בלי הודעות, בלי שיחות ובלי ״מה נשמע?״. השקט מגיע עם שלט לדלת.', price: 180 },
-    { id: 'sababa', cat: 'חברתי', bg: '#FFDCC8', name: 'לדעת מה התכוון ב״סבבה.״', desc: 'פענוח מלא של הנקודה בסוף המשפט. כולל מדריך לטון, לשעת השליחה ולהבדל בין סבבה לסבבה.', price: 59, badge: 'נשארו 3' },
+    { id: 'sababa', cat: 'חברתי', bg: '#FFDCC8', name: 'להבין מה הוא התכוון ב״סבבה.״', desc: 'פענוח מלא של הנקודה בסוף המשפט. כולל מדריך לטון, לשעת השליחה ולהבדל בין סבבה לסבבה.', price: 59, badge: 'נשארו 3' },
     { id: 'sunday', cat: 'ראש', bg: '#FFEE9E', name: 'יום ראשון בערב בלי הלחץ', desc: 'הערב שלפני השבוע, בלי הבטן. מרגיש כמו שבת, רק עם בגדים נקיים מוכנים למחר.', price: 130 },
-    { id: 'battery', cat: 'שגרה', bg: '#E3F7A0', name: 'אנרגיה ללכת לחדר כושר אחרי העבודה', desc: 'סוללה מלאה ב־18:30. הנעליים כבר על הרגליים והספה מאבדת את הכוח עליך.', price: 320, old: 460, badge: 'מבצע 30%', hot: true },
+    { id: 'battery', cat: 'שגרה', bg: '#E3F7A0', name: 'אנרגיה ללכת לחדר כושר אחרי העבודה', desc: 'סוללה מלאה ב־18:30. הנעליים כבר על הרגליים והספה כבר לא מושכת.', price: 320, old: 460, badge: 'מבצע 30%', hot: true },
     { id: 'room', cat: 'ראש', bg: '#FFC8E8', name: 'לזכור למה נכנסתי לחדר', desc: 'הרגע הזה בפתח הדלת שבו הכל מתחבר. מגיע בגודל כיס ומתאים למטבח ולמסדרון.', price: 39, badge: 'חדש' },
-    { id: 'no', cat: 'חברתי', bg: '#CFD8FF', name: 'הכוח להגיד ״לא״ בפעם הראשונה', desc: 'מילה אחת, בלי הסברים ובלי ״אולי״. כולל ביטחון לא להוסיף ״סליחה״ בסוף.', price: 149 },
-    { id: 'tabs', cat: 'שקט', bg: '#FFE6C2', name: 'סגירה של כל הטאבים הפתוחים', desc: 'ארבעים ושבעה חלונות נסגרים ואת לא מפסידה שום דבר חשוב. מתאים גם למי שבטוחה שהיא עוד תקרא את זה.', price: 99, badge: 'נשארו 2' },
-    { id: 'story', cat: 'חברתי', bg: '#E5D4FF', name: 'לא לבדוק מי צפה בסטורי', desc: 'העיגול נשאר סגור, את ממשיכה בחיים והרשימה לא קוראת לך.', price: 49 },
+    { id: 'no', cat: 'חברתי', bg: '#CFD8FF', name: 'הכוח להגיד ״לא״ בפעם הראשונה', desc: 'מילה אחת, בלי הסברים ובלי ״אולי״. וגם בלי ״סליחה״ בסוף.', price: 149 },
+    { id: 'tabs', cat: 'שקט', bg: '#FFE6C2', name: 'סגירה של כל הטאבים הפתוחים', desc: 'ארבעים ושבעה חלונות נסגרים ולא הולך לאיבוד שום דבר חשוב. מתאים גם למי שבטוח שהוא עוד יקרא את זה.', price: 99, badge: 'נשארו 2' },
+    { id: 'story', cat: 'חברתי', bg: '#E5D4FF', name: 'לא לבדוק מי צפה בסטורי', desc: 'העיגול נשאר סגור, החיים ממשיכים ואין צורך לבדוק מי ראה.', price: 49 },
     { id: 'bank', cat: 'שגרה', bg: '#BDEFD6', name: 'חשבון בנק שנראה בסדר ב־28 לחודש', desc: 'יתרה ירוקה לפני המשכורת, בלי להזיז כסף מחסכונות. מגיע עם מינוס שנעלם מעצמו.', price: 899, old: 1199 }
   ];
   /* ציור חדש וברור יותר לחדר, ומוצרים נוספים */
@@ -703,18 +866,18 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     { id: 'wifi', cat: 'שגרה', bg: '#C7F0DA', name: 'אינטרנט מלא בכל מקום, גם במעלית', desc: 'חמישה פסים ברכבת, במרתף ובחדר המדרגות. הסרטון נטען עד הסוף ולא נתקע על 99 אחוז.', price: 119, badge: 'חדש' },
     { id: 'alarm', cat: 'שגרה', bg: '#FFEE9E', name: 'קימה בצלצול הראשון', desc: 'מכוונים לשבע וקמים בשבע. בלי נודניק, בלי ״עוד חמש דקות״ ובלי מיקוח עם עצמך.', price: 69, badge: 'נשארו 5' },
     { id: 'shower', cat: 'שקט', bg: '#CDE5FF', name: 'מים חמים שלא נגמרים', desc: 'מקלחת בטמפרטורה מושלמת שאפשר להישאר בה כמה שרוצים. הבוילר מעולם לא התפרק.', price: 210 },
-    { id: 'reply', cat: 'חברתי', bg: '#FFD3DF', name: 'תשובה תוך דקה ממי שחיכיתם לו', desc: 'שני וי כחולים ומיד אחריהם ״סליחה, ראיתי עכשיו!״. מגיע עם חצי חיים פחות של בדיקת הטלפון.', price: 79 },
+    { id: 'reply', cat: 'חברתי', bg: '#FFD3DF', name: 'תשובה תוך דקה ממי שחיכיתם לו', desc: 'שני וי כחולים ומיד אחריהם ״סליחה, ראיתי עכשיו!״. בלי צורך לבדוק את הטלפון כל חמש שניות.', price: 79 },
     { id: 'weather', cat: 'שקט', bg: '#FFE6C2', name: '24 מעלות כל השנה', desc: 'לא חם מדי ולא קר מדי. אין צורך בחולצה נוספת, במטרייה או ב״זה בטח יעבור״.', price: 450, old: 560, badge: 'מבצע 20%' },
     { id: 'inbox', cat: 'ראש', bg: '#E5D4FF', name: 'אפס הודעות שלא נקראו', desc: 'תיבה ריקה, אייקונים בלי עיגול אדום, והקבוצה של המשפחה סוף סוף שקטה.', price: 140 },
     { id: 'cables', cat: 'שגרה', bg: '#E3F7A0', name: 'אוזניות שלא מסתבכות בכיס', desc: 'הכבל יוצא מהכיס ישר, כמו שנכנס. גם אחרי שבוע בתיק וגם אחרי ריצה.', price: 35, badge: 'הכי זול' }
   );
 
   var TAGS = {
-    sleep: '8 שעות שינה', msg: 'ביטחון לשלוח', yarn: 'לשכוח את 2017', door: '24 שעות שקט',
-    sababa: 'מה הוא התכוון', sunday: 'ראשון בלי לחץ', battery: 'כוח לחדר כושר', room: 'לזכור למה נכנסתי',
-    no: 'להגיד לא', tabs: '0 טאבים פתוחים', story: 'לא לבדוק סטורי', bank: 'יתרה ירוקה ב־28',
-    parking: 'חניה ליד הכניסה', wifi: 'אינטרנט בכל מקום', alarm: 'צלצול אחד וקמים', shower: 'מים חמים לנצח',
-    reply: 'תשובה תוך דקה', weather: '24° כל השנה', inbox: 'אפס לא נקראו', cables: 'כבלים בלי קשרים'
+    sleep: '8 שעות שינה', msg: 'אומץ לשלוח', yarn: 'לשכוח את 2017', door: '24 שעות שקט',
+    sababa: 'מה התכוון באמת', sunday: 'ראשון בלי לחץ', battery: 'כוח לחדר כושר', room: 'לזכור למה נכנסתי',
+    no: 'להגיד לא', tabs: '0 טאבים פתוחים', story: 'לא לבדוק סטורי', bank: 'פלוס בבנק ב־28',
+    parking: 'חניה ליד הכניסה', wifi: 'אינטרנט בכל מקום', alarm: 'קמים בצלצול הראשון', shower: 'מים חמים לנצח',
+    reply: 'תשובה תוך דקה', weather: '24° כל השנה', inbox: 'תיבה ריקה', cables: 'כבלים בלי קשרים'
   };
   var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-8-5.2-9.6-10C1.3 7.5 3.4 4.5 6.6 4.5c2 0 3.9 1 5.4 3 1.5-2 3.4-3 5.4-3 3.2 0 5.3 3 4.2 6.5C20 15.8 12 21 12 21z"/></svg>';
   var wish = {};
@@ -855,9 +1018,12 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     { t: 'לשלם בחיוך', d: 'מקבלים גם חיוך קטן.' }
   ];
   var PACKS = [
-    { t: 'נייר משי', d: 'עדין, שקט ומסודר.' },
-    { t: 'ניילון בועות', d: 'אפשר לפוצץ אחרי שפותחים.' },
-    { t: 'בלי אריזה', d: 'ישר לידיים.' }
+    { t: 'בלי עטיפה', d: 'ישר לידיים.', i: '<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1C1233" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L24 9l17 8v19L24 44 7 36z" fill="#FFD3B8"/><path d="M7 17l17 8 17-8M24 25v19"/></svg>' },
+    { t: 'נייר משי', d: 'עדין ושקט.', i: '<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1C1233" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 14Q15 7 24 13T41 11L39 37Q31 43 24 37T9 39Z" fill="#FFD3DF"/><path d="M12 16Q20 24 30 15T38 22" fill="#E5D4FF"/><path d="M14 29Q24 35 34 28"/></svg>' },
+    { t: 'ניילון בועות', d: 'אפשר לפוצץ.', i: '<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1C1233" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="36" height="28" rx="7" fill="#CDE7FF"/><circle cx="16" cy="20" r="4"/><circle cx="28" cy="20" r="4"/><circle cx="22" cy="30" r="4"/><circle cx="34" cy="30" r="4"/></svg>' },
+    { t: 'נוטלה', d: 'מתוק ונוטף.', i: '<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1C1233" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="11" y="17" width="26" height="26" rx="7" fill="#8A4B2A"/><rect x="9" y="8" width="30" height="10" rx="4" fill="#FFF1D6"/><path d="M17 28Q24 24 31 28" stroke="#FFE9C7"/><path d="M20 36v3M28 35v5" stroke="#FFE9C7"/></svg>' },
+    { t: 'מלא מרשמלואים', d: 'רך מכל צד.', i: '<svg viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="#1C1233" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="22" width="20" height="20" rx="8" fill="#fff"/><rect x="22" y="10" width="20" height="20" rx="8" fill="#FFD3DF"/><rect x="20" y="28" width="22" height="14" rx="7" fill="#fff"/></svg>' },
+    { t: 'מלא מיינות מצויות', d: 'ציוצים בלי סוף.', get i() { return mynaBird(); } }
   ];
   var COURIERS = [
     { k: 'myna', t: 'מיינה מצויה', d: 'עפה כל הדרך עם החבילה, ומתלוננת בדרך.' },
@@ -949,9 +1115,9 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
   }
 
   function radios(name, list, cur) {
-    return '<div class="opts" role="radiogroup" aria-labelledby="oh">' + list.map(function (o, i) {
+    return '<div class="opts ' + name + '" role="radiogroup" aria-labelledby="oh">' + list.map(function (o, i) {
       return '<label class="opt"><input type="radio" name="' + name + '" value="' + i + '"' + (i === cur ? ' checked' : '') + '>' +
-        (o.k ? '<span class="oi">' + courierSvg(o.k) + '</span>' : '') +
+        (o.k ? '<span class="oi">' + courierSvg(o.k) + '</span>' : (o.i ? '<span class="oi pi">' + o.i + '</span>' : '')) +
         '<span class="ot"><b>' + o.t + '</b><span>' + o.d + '</span></span></label>';
     }).join('') + '</div>';
   }
@@ -971,6 +1137,7 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
 
   function renderOrder(focus) {
     ship.innerHTML = '';
+    if (order && order.phase !== 'pack') clearFx();
     var o = order, idx = PHASE_IDX[o.phase], body = '', foot = '';
     var head = '<ol class="steps" aria-label="שלבי ההזמנה">' + STEP_NAMES.map(function (n, i) {
       return '<li class="' + (i < idx ? 'done' : (i === idx ? 'on' : '')) + '"' + (i === idx ? ' aria-current="step"' : '') + '><i>' + (i < idx ? '✓' : (i + 1)) + '</i>' + n + '</li>';
@@ -987,11 +1154,11 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     } else if (o.phase === 'processing') {
       body = '<h3 id="oh">מעבדים את התשלום</h3><p class="sub2">זה לוקח כמה שניות. אין צורך לעשות כלום.</p>' + prog('בודקים את אמצעי התשלום');
     } else if (o.phase === 'pack') {
-      body = '<h3 id="oh">איך לארוז?</h3><p class="sub2">התשלום אושר. בחרו אריזה להזמנה ' + o.id + '.</p><div class="pstage" id="pstage" aria-hidden="true"></div>' + radios('pk', PACKS, o.pack);
-      foot = '<button class="pay" data-next>הלאה: בחירת שליח</button>';
+      body = '<h3 id="oh">איך לארוז?</h3><p class="sub2">התשלום אושר. בחרו אריזה להזמנה ' + o.id + '.</p>' + radios('pk', PACKS, o.pack);
+      foot = '<button class="pay" data-next>הלאה: בחירת שליח</button><button class="back" data-prev>חזרה לשלב הקודם</button>';
     } else if (o.phase === 'ship') {
       body = '<h3 id="oh">מי ימסור?</h3><p class="sub2">בחרו שליח. הוא יוצא ברגע שתלחצו.</p>' + radios('cr', COURIERS, o.courier);
-      foot = '<button class="pay" data-next>שלחו את ההזמנה</button>';
+      foot = '<button class="pay" data-next>שלחו את ההזמנה</button><button class="back" data-prev>חזרה לשלב הקודם</button>';
     } else if (o.phase === 'transit') {
       var c = COURIERS[o.courier];
       body = '<h3 id="oh">ההזמנה בדרך אליכם</h3><p class="sub2">המשלוח אצל: ' + c.t + '. אריזה: ' + PACKS[o.pack].t + '.</p>' +
@@ -1009,7 +1176,6 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
 
     cartBody.innerHTML = '<div class="ord">' + head + body + '</div>';
     cartFoot.innerHTML = foot;
-    if (o.phase === 'pack') renderPackStage();
     if (focus) {
       cartBody.scrollTop = 0;
       var h = document.getElementById('oh');
@@ -1157,10 +1323,11 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     for (var i = 0; i < n; i++) {
       parts.push({
         tx: Math.random() * W, ty: Math.random() * H, fl: 650 + Math.random() * 550,
-        rel: 1700 + Math.random() * 1000, r0: Math.random() * 6.28, sp: (Math.random() - 0.5) * 10,
+        rel: 0, r0: Math.random() * 6.28, sp: (Math.random() - 0.5) * 10,
         w: 6 + Math.random() * 6, h: 11 + Math.random() * 8, c: cols[i % cols.length],
         ph: Math.random() * 6.28, arc: 60 + Math.random() * 140
       });
+      parts[i].rel = parts[i].fl * (0.55 + Math.random() * 0.2);
     }
     var start = performance.now(), raf = 0, stopped = false;
     function frame(now) {
@@ -1207,50 +1374,63 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     };
   }
 
-  var packTimers = [];
-  function packStageSvg(i) {
-    var s = '<svg viewBox="0 0 200 160" aria-hidden="true">';
-    if (i === 0) {
-      s += PKG_IN + '<g>' +
-        '<path class="ts t1" d="M22 64Q40 36 100 24Q160 36 178 64L186 128Q170 154 100 158Q30 154 14 128Z" fill="#FFD3DF" fill-opacity=".85" stroke="#1C1233" stroke-width="2"/>' +
-        '<path class="ts t2" d="M34 70Q60 50 100 44Q140 50 166 70L172 124Q150 146 100 148Q50 146 28 124Z" fill="#E5D4FF" fill-opacity=".88" stroke="#1C1233" stroke-width="2"/>' +
-        '<path class="ts t3" d="M58 44L70 14L86 40L100 8L114 40L130 14L142 44Q100 56 58 44Z" fill="#fff" fill-opacity=".95" stroke="#1C1233" stroke-width="2" stroke-linejoin="round"/>' +
-        '<path class="ts t3" d="M60 84Q100 96 140 84M56 108Q100 122 144 108" fill="none" stroke="#1C1233" stroke-opacity=".25" stroke-width="2"/></g>';
-    } else if (i === 1) {
-      s += PKG_IN + '<path class="film" d="M24 58L100 24L176 58V132L100 156L24 132Z" fill="#CDE7FF" fill-opacity=".45" stroke="#7FB8E8" stroke-width="2.5" stroke-linejoin="round"/>';
-      for (var y = 62, r = 0; y <= 150; y += 15, r++) {
-        for (var x = 36 + (r % 2) * 9; x <= 166; x += 18) {
-          var d = Math.abs(x - 100) / 76;
-          var top = 24 + 34 * d, bot = 156 - 24 * d;
-          if (y - 8 < top || y + 8 > bot || x < 32 || x > 168) continue;
-          s += '<g class="bub"><circle class="bc" cx="' + x + '" cy="' + y + '" r="7.5" fill="#fff" fill-opacity=".55" stroke="#7FB8E8" stroke-width="1.5"/>' +
-            '<circle cx="' + (x - 2.5) + '" cy="' + (y - 2.5) + '" r="2" fill="#fff"/>' +
-            '<circle class="ring" cx="' + x + '" cy="' + y + '" r="8" fill="none" stroke="#7FB8E8" stroke-width="2"/></g>';
-        }
+  var fxEl = null, fxT;
+  function clearFx() { if (fxEl) { fxEl.remove(); fxEl = null; } clearTimeout(fxT); }
+  function rnd(a, b) { return a + Math.random() * (b - a); }
+  function mynaBird() {
+    return '<svg viewBox="0 0 76 48" aria-hidden="true"><path class="bw" d="M30 24L12 6Q34 2 46 22Z" fill="#5B4130" stroke="#1C1233" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<ellipse cx="34" cy="28" rx="20" ry="11" fill="#7B5A44" stroke="#1C1233" stroke-width="2.5"/>' +
+      '<path d="M16 30L2 38L18 36Z" fill="#4A3426" stroke="#1C1233" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '<circle cx="56" cy="22" r="9" fill="#2B2019" stroke="#1C1233" stroke-width="2.5"/>' +
+      '<path d="M63 20L74 24L63 27Z" fill="#FFC83D" stroke="#1C1233" stroke-width="2" stroke-linejoin="round"/>' +
+      '<path d="M50 28Q58 34 66 29" fill="none" stroke="#FFC83D" stroke-width="3" stroke-linecap="round"/><circle cx="58" cy="20" r="1.8" fill="#fff"/></svg>';
+  }
+  function packFx(i) {
+    clearFx();
+    if (i === 0 || reduced()) return;
+    var el = document.createElement('div');
+    el.className = 'fx';
+    el.setAttribute('aria-hidden', 'true');
+    var h = '', dur = 3000, k;
+    if (i === 1) {
+      var cols = ['#FFD3DF', '#E5D4FF', '#FFF1B8', '#D5ECFF'];
+      for (k = 0; k < 4; k++) {
+        h += '<svg class="tis" style="--x:' + (k * 24 - 6) + '%;--d:' + (k * .18) + 's;--r:' + (k % 2 ? 6 : -6) + 'deg" viewBox="0 0 200 260"><path d="M10 20Q60 0 100 14T190 10L196 90Q180 140 192 250Q140 262 100 246T8 252Q22 190 6 120Q16 70 10 20Z" fill="' + cols[k] + '" fill-opacity=".72"/><path d="M40 60Q90 80 160 56M30 140Q100 160 170 134M44 210Q100 226 156 204" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3"/></svg>';
+      }
+    } else if (i === 2) {
+      dur = 5600;
+      for (k = 0; k < 16; k++) {
+        h += '<button class="bu" tabindex="-1" style="--x:' + rnd(2, 90) + '%;--s:' + rnd(34, 80) + 'px;--d:' + rnd(0, .9) + 's;--t:' + rnd(3.4, 5) + 's"></button>';
+      }
+    } else if (i === 3) {
+      dur = 4200;
+      h += '<span class="nt-top"></span>';
+      for (k = 0; k < 9; k++) {
+        h += '<span class="nt" style="--x:' + (k * 11 + rnd(-2, 2)) + '%;--w:' + rnd(22, 38) + 'px;--h:' + rnd(28, 78) + 'vh;--d:' + rnd(0, .8) + 's"></span>';
+      }
+    } else if (i === 4) {
+      dur = 4600;
+      var mc = ['#FFFFFF', '#FFD3DF', '#FFFFFF', '#F2E6FF'];
+      for (k = 0; k < 24; k++) {
+        var w = rnd(34, 56);
+        h += '<span class="mm" style="--x:' + rnd(0, 92) + '%;--w:' + w + 'px;--ty:' + rnd(66, 92) + 'vh;--d:' + rnd(0, 1.2) + 's;--r:' + rnd(-25, 25) + 'deg;--c:' + mc[k % 4] + '"></span>';
       }
     } else {
-      s += '<g class="bounce">' + PKG_IN + '</g>';
-    }
-    return s + '</svg>';
-  }
-  function renderPackStage() {
-    var st = document.getElementById('pstage');
-    if (!st || !order) return;
-    packTimers.forEach(clearTimeout);
-    packTimers = [];
-    var i = order.pack;
-    st.innerHTML = packStageSvg(i) + (i === 1 ? '<span class="pcap">לחצו על הבועות</span>' : '');
-    if (i === 1) {
-      var bs = [].slice.call(st.querySelectorAll('.bub'));
-      for (var n = 0; n < 7 && bs.length; n++) {
-        (function (b, delay) { packTimers.push(setTimeout(function () { b.classList.add('popped'); }, delay)); })(bs.splice(Math.floor(Math.random() * bs.length), 1)[0], 450 + n * 170);
+      dur = 5200;
+      for (k = 0; k < 14; k++) {
+        h += '<span class="by" style="top:' + rnd(6, 86) + '%;--w:' + rnd(44, 84) + 'px;--d:' + rnd(0, 2) + 's;--t:' + rnd(2.6, 3.8) + 's">' + mynaBird() + '</span>';
       }
     }
+    el.style.animationDelay = (dur / 1000 - .5) + 's';
+    fxT = setTimeout(clearFx, dur);
+    el.innerHTML = h;
+    el.addEventListener('click', function (e) {
+      var b = e.target.closest('.bu');
+      if (b && !b.classList.contains('pop')) { b.classList.add('pop'); setTimeout(function () { b.remove(); }, 380); }
+    });
+    document.body.appendChild(el);
+    fxEl = el;
   }
-  document.addEventListener('click', function (e) {
-    var b = e.target.closest && e.target.closest('.bub');
-    if (b) b.classList.add('popped');
-  });
 
   function updateCount() {
     var n = Object.keys(order.act).length, all = order.items.length;
@@ -1305,6 +1485,8 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
   }
 
   function openCart() {
+    clearTimeout(toastT);
+    document.getElementById('toast').classList.remove('on');
     drawer.inert = false;
     drawer.classList.add('on');
     scrim.classList.add('on');
@@ -1320,12 +1502,12 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
   }
 
   var toastT;
-  function toast(msg) {
+  function toast(msg, ms) {
     var el = document.getElementById('toast');
     el.textContent = msg;
     el.classList.add('on');
     clearTimeout(toastT);
-    toastT = setTimeout(function () { el.classList.remove('on'); }, 1800);
+    toastT = setTimeout(function () { el.classList.remove('on'); }, ms || 1800);
   }
 
   function change(id, d) {
@@ -1335,9 +1517,37 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     renderCart();
   }
 
+  function miniConfetti(btn) {
+    if (reduced() || !btn.animate) return;
+    var r = btn.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+    var cols = ['#FF3B6B', '#FFE45E', '#4DD9A0', '#8B5CFF', '#2E9BFF'];
+    for (var i = 0; i < 22; i++) {
+      var d = document.createElement('i');
+      d.setAttribute('aria-hidden', 'true');
+      d.style.cssText = 'position:fixed;z-index:95;pointer-events:none;left:' + cx + 'px;top:' + cy + 'px;width:3px;height:' + (10 + Math.random() * 8) + 'px;border-radius:1px;background:' + cols[i % cols.length];
+      document.body.appendChild(d);
+      var side = i % 2 ? 1 : -1, dx = side * (50 + Math.random() * 130), dy = (Math.random() - 0.5) * 70, rot = Math.random() * 540 - 270;
+      var a = d.animate([
+        { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+        { transform: 'translate(' + dx + 'px,' + dy + 'px) rotate(' + rot + 'deg)', opacity: 0 }
+      ], { duration: 650 + Math.random() * 350, easing: 'cubic-bezier(.15,.7,.3,1)', fill: 'forwards' });
+      a.onfinish = (function (el) { return function () { el.remove(); }; })(d);
+    }
+  }
+
   document.addEventListener('click', function (e) {
     var t = e.target.closest('button, a');
     if (!t) return;
+
+    if (t.dataset.surprise !== undefined) {
+      var pick = P[Math.floor(Math.random() * P.length)];
+      maybeReset();
+      change(pick.id, 1);
+      toast('הפתעה! תבדקו את הסל', 4200);
+      setTimeout(function () { miniConfetti(document.getElementById('toast')); }, 120);
+      t.classList.remove('spin'); void t.offsetWidth; t.classList.add('spin');
+      return;
+    }
 
     if (t.dataset.add) {
       maybeReset();
@@ -1365,6 +1575,7 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     else if (t.dataset.act) activate(t.dataset.act);
     else if (t.dataset.actall !== undefined) activateAll();
     else if (t.dataset.back !== undefined) { resetOrder(); renderCart(); }
+    else if (t.dataset.prev !== undefined) { if (order && (order.phase === 'ship' || order.phase === 'pack')) { clearFx(); order.phase = order.phase === 'ship' ? 'pack' : 'pay'; renderOrder(true); } }
     else if (t.dataset.ubdone !== undefined) closeUnbox(!document.getElementById('ubPanel').hidden);
     else if (t.id === 'ubBox') openBox();
     else if (t.dataset.rm) { delete cart[t.dataset.rm]; save(); renderCart(); }
@@ -1405,11 +1616,42 @@ footer .logo { font-size: 32px; margin-bottom: 8px; color: var(--ink); }
     var n = e.target.name;
     if (!order || !n) return;
     if (n === 'pm') order.method = Number(e.target.value);
-    else if (n === 'pk') { order.pack = Number(e.target.value); renderPackStage(); }
+    else if (n === 'pk') { order.pack = Number(e.target.value); packFx(order.pack); }
     else if (n === 'cr') order.courier = Number(e.target.value);
   });
 
   renderGrid();
   renderCart();
+
+  var topEl = document.querySelector('.top'), menuBtn = document.getElementById('menuBtn'), menuEl = document.getElementById('menu');
+  function setMenu(on) {
+    topEl.classList.toggle('open', on);
+    menuBtn.setAttribute('aria-expanded', on ? 'true' : 'false');
+    menuEl.inert = !on;
+  }
+  menuEl.inert = true;
+  menuBtn.addEventListener('click', function () { setMenu(!topEl.classList.contains('open')); });
+  document.addEventListener('click', function (e) {
+    if (!topEl.classList.contains('open')) return;
+    if (e.target.closest('#menu a') || !e.target.closest('.top')) setMenu(false);
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && topEl.classList.contains('open')) { setMenu(false); menuBtn.focus(); }
+  });
+  document.getElementById('cForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    e.target.reset();
+    toast('תודה! זה אתר קונספט, אז אף אחד לא יענה. אבל הרגשנו את הכוונה.');
+  });
+
+  document.addEventListener('click', function (e) {
+    var ub = document.getElementById('unbox');
+    if (!ub || !ub.classList.contains('open')) return;
+    var pn = document.getElementById('ubPanel');
+    if (!pn || pn.hidden || e.target.closest('#ubPanel, .ub-x')) return;
+    closeUnbox(true);
+    closeCart();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 })();
 </script>
